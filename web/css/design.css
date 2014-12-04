@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #dbdbdb;
+}
+
+#menus {
+    margin-left: 90px;
+}
+
+#search {
+    margin-left: 90px;
+}
+
+#footer {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #222222;
+    color: #dbdbdb;
+    font-size: 11px;
+    text-align: center;
+}
