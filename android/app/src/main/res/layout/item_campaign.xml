@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    card_view:cardCornerRadius="5dp"
+    android:background="?android:selectableItemBackground"
+    android:focusable="true"
+    android:clickable="true"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.epita.mti.nuitdelinfoandroid.design.RoundedImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:id="@+id/item_logo"/>
+
+        <TextView
+            style="@style/TitleSmall"
+            android:id="@+id/item_name"
+            android:layout_height="35dp"
+            android:paddingLeft="10dp"
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@id/item_logo"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/item_logo"
+            android:weightSum="10">
+
+            <TextView
+                style="@style/SubTitleSmall"
+                android:id="@+id/item_location"
+                android:layout_width="0dp"
+                android:layout_weight="6"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                style="@style/SubTitleSmall"
+                android:id="@+id/item_end_date"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                android:gravity="right"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
