@@ -1,6 +1,7 @@
 package com.epita.mti.nuitdelinfoandroid.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,13 +23,15 @@ public class CampaignAdapter extends RecyclerView.Adapter<CampaignAdapter.Holder
 
     private LayoutInflater mInflater;
 
+    private RecyclerView mRecyclerView;
     private List<Campaign> items;
 
-    public CampaignAdapter(List<Campaign> modelData) {
+    public CampaignAdapter(List<Campaign> modelData, RecyclerView recyclerView) {
         if (modelData == null) {
             throw new IllegalArgumentException(
                     "modelData must not be null");
         }
+        this.mRecyclerView = recyclerView;
         this.items = modelData;
     }
 
@@ -40,6 +43,15 @@ public class CampaignAdapter extends RecyclerView.Adapter<CampaignAdapter.Holder
                 inflate(R.layout.item_campaign,
                         viewGroup,
                         false);
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int itemPosition = mRecyclerView.getChildPosition(v);
+                Campaign item = items.get(itemPosition);
+                Log.d(TAG, item.toString());
+            }
+        });
+
         return new Holder(itemView);
     }
 

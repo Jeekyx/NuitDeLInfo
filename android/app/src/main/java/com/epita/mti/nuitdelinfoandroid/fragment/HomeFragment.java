@@ -77,7 +77,7 @@ public class HomeFragment extends Fragment {
 
         campaigns.add(c);
 
-        mAdapter = new CampaignAdapter(campaigns);
+        mAdapter = new CampaignAdapter(campaigns, mRecyclerView);
         mRecyclerView.setAdapter(mAdapter);
 
         loadData();
