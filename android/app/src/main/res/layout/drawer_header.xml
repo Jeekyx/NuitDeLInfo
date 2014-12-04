@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content">
+
+    <com.epita.mti.nuitdelinfoandroid.design.RoundedImageView
+        android:id="@+id/profile_avatar"
+        android:layout_marginTop="10dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="16dp"
+        android:paddingBottom="8dp"
+        android:layout_height="70dp"
+        android:layout_width="70dp" />
+
+    <LinearLayout
+        android:id="@+id/profile_info"
+        android:layout_toRightOf="@id/profile_avatar"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:paddingLeft="0dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:gravity="center_vertical"
+            android:text="@string/drawer_connection"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:gravity="center_vertical"
+            android:text="@string/drawer_subtitle"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"/>
+
+    </LinearLayout>
+
+    <View style="@style/Separator"
+        android:layout_below="@id/profile_avatar"
+        android:paddingBottom="8dp"/>
+
+</RelativeLayout>

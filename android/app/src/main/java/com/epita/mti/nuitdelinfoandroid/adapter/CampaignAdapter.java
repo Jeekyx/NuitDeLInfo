@@ -1,0 +1,103 @@
+package com.epita.mti.nuitdelinfoandroid.adapter;
+
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.epita.mti.nuitdelinfoandroid.R;
+import com.epita.mti.nuitdelinfoandroid.design.RoundedImageView;
+import com.epita.mti.nuitdelinfoandroid.model.Campaign;
+import com.epita.mti.nuitdelinfoandroid.util.DateUtil;
+
+import java.util.List;
+
+/**
+ * Created by mrollin on 24/10/14.
+ */
+public class CampaignAdapter extends RecyclerView.Adapter<CampaignAdapter.Holder> {
+    private static final String TAG = CampaignAdapter.class.getSimpleName();
+
+    private LayoutInflater mInflater;
+
+    private List<Campaign> items;
+
+    public CampaignAdapter(List<Campaign> modelData) {
+        if (modelData == null) {
+            throw new IllegalArgumentException(
+                    "modelData must not be null");
+        }
+        this.items = modelData;
+    }
+
+    @Override
+    public Holder onCreateViewHolder(
+            ViewGroup viewGroup, int viewType) {
+        View itemView = LayoutInflater.
+                from(viewGroup.getContext()).
+                inflate(R.layout.item_campaign,
+                        viewGroup,
+                        false);
+        return new Holder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(final Holder viewHolder, int position) {
+        Campaign model = items.get(position);
+
+        // Populate the item contents
+        viewHolder.tvItemName.setText(model.getName());
+        viewHolder.tvItemEndDate.setText(DateUtil.timeAgoInWords(model.getInscriptionEndDate()));
+        viewHolder.tvItemLocation.setText(model.getLocation());
+
+        // Load the screen cap image on a background thread
+        /*
+        final PaletteTransformation paletteTransformation = PaletteTransformation.instance();
+        Picasso.with(viewHolder.ivProductPicture.getContext()).load(model.getThumbnails())
+                .fit().centerCrop()
+                .transform(paletteTransformation)
+                .into(viewHolder.ivItemLogo, new Callback.EmptyCallback() {
+                    @Override
+                    public void onSuccess() {
+                        Bitmap bitmap = ((BitmapDrawable) viewHolder.ivItemLogo.getDrawable()).getBitmap();
+                        Palette palette = PaletteTransformation.getPalette(bitmap);
+
+                        viewHolder.ivItemLogo.setBackgroundColor(palette.getVibrantColor(android.R.color.white));
+                        viewHolder.ivItemLogo.getBackground().setAlpha(20);
+                    }
+                });
+        */
+    }
+
+    /**
+     * Will add a new item to our viewModel
+     *
+     * @param list the list to add
+     */
+    public void addAll(List<Campaign> list) {
+        items.addAll(list);
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public int getItemCount() {
+        return items.size();
+    }
+
+    public final static class Holder extends RecyclerView.ViewHolder {
+        public ImageView ivItemLogo;
+        public TextView tvItemName;
+        public TextView tvItemEndDate;
+        public TextView tvItemLocation;
+
+        public Holder(View itemView) {
+            super(itemView);
+            ivItemLogo = (RoundedImageView) itemView.findViewById(R.id.item_logo);
+            tvItemName = (TextView) itemView.findViewById(R.id.item_name);
+            tvItemEndDate = (TextView) itemView.findViewById(R.id.item_end_date);
+            tvItemLocation = (TextView) itemView.findViewById(R.id.item_location);
+        }
+    }
+}
