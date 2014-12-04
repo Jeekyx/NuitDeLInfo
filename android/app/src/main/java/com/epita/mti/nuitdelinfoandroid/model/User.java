@@ -3,9 +3,15 @@ package com.epita.mti.nuitdelinfoandroid.model;
 /**
  * Created by yvan on 12/4/14.
  */
-public class User {
+public class User extends Model {
     private String login;
     private String password;
+    private UserType type;
+
+    public enum UserType {
+        VOLUNTEER,
+        CHARITY
+    };
 
     public String getLogin() {
         return login;
@@ -21,5 +27,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public UserType getType() {
+        return type;
+    }
+
+    public void setType(UserType type) {
+        this.type = type;
     }
 }

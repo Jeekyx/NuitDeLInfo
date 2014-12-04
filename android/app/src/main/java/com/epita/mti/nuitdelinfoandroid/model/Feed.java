@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by yvan on 12/4/14.
  */
-public class Feed {
+public class Feed extends Model {
     private String messsage;
     private String imageLocation;
     private Date submissionDate;

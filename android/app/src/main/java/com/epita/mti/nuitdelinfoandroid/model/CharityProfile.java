@@ -3,12 +3,14 @@ package com.epita.mti.nuitdelinfoandroid.model;
 /**
  * Created by yvan on 12/4/14.
  */
-public class CharityProfile {
+public class CharityProfile extends Model {
     private String name;
     private String description;
     private String email;
     private String website;
     private String address;
+    private String imageUrl;
+    private User user;
 
     public String getName() {
         return name;
@@ -48,5 +50,21 @@ public class CharityProfile {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

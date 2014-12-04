@@ -6,14 +6,16 @@ import java.util.List;
 /**
  * Created by yvan on 12/4/14.
  */
-public class Campaign {
+public class Campaign extends Model {
     private String name;
     private String description;
     private String location;
-    private int volunteers;
+    // The number of volunteers wanted for the campaign
+    private int wantedVolunteers;
 
     private CharityProfile charityProfile;
     private List<Feed> feeds;
+    private List<VolunteerProfile> volunteers;
 
     private Date startDate;
     private Date endDate;
@@ -43,11 +45,19 @@ public class Campaign {
         this.location = location;
     }
 
-    public int getVolunteers() {
+    public int getWantedVolunteers() {
+        return wantedVolunteers;
+    }
+
+    public void setWantedVolunteers(int wantedVolunteers) {
+        this.wantedVolunteers = wantedVolunteers;
+    }
+
+    public List<VolunteerProfile> getVolunteers() {
         return volunteers;
     }
 
-    public void setVolunteers(int volunteers) {
+    public void setVolunteers(List<VolunteerProfile> volunteers) {
         this.volunteers = volunteers;
     }
 
