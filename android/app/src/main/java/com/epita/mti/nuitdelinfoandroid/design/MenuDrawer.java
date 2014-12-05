@@ -58,6 +58,10 @@ public class MenuDrawer {
         // Recycle the typed array
         mNavMenuIcons.recycle();
 
+        // Set up the header
+        final View header = mActivity.getLayoutInflater().inflate(R.layout.drawer_header, mDrawerList, false);
+        mDrawerList.addHeaderView(header);
+
         // Setting the nav drawer list adapter
         MenuDrawerAdapter adapter = new MenuDrawerAdapter(mActivity.getApplicationContext(), mNavDrawerItems);
         mDrawerList.setAdapter(adapter);
@@ -73,10 +77,6 @@ public class MenuDrawer {
         ) {
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-        // Set up the header
-        final View header = mActivity.getLayoutInflater().inflate(R.layout.drawer_header, mDrawerList, false);
-        mDrawerList.addHeaderView(header);
 
         // Set the listener for the list within the drawer
         mDrawerList.setOnItemClickListener(new MenuDrawerClickListener(mActivity, mDrawerLayout, mDrawerList));

@@ -1,5 +1,7 @@
 package com.epita.mti.nuitdelinfoandroid.adapter;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.epita.mti.nuitdelinfoandroid.R;
+import com.epita.mti.nuitdelinfoandroid.activity.CampaignActivity;
+import com.epita.mti.nuitdelinfoandroid.activity.HomeActivity;
 import com.epita.mti.nuitdelinfoandroid.design.RoundedImageView;
 import com.epita.mti.nuitdelinfoandroid.model.Campaign;
 import com.epita.mti.nuitdelinfoandroid.util.DateUtil;
@@ -22,11 +26,13 @@ public class CampaignAdapter extends RecyclerView.Adapter<CampaignAdapter.Holder
     private static final String TAG = CampaignAdapter.class.getSimpleName();
 
     private LayoutInflater mInflater;
+    private Activity mActivity;
 
     private RecyclerView mRecyclerView;
     private List<Campaign> items;
 
-    public CampaignAdapter(List<Campaign> modelData, RecyclerView recyclerView) {
+    public CampaignAdapter(Activity activity, List<Campaign> modelData, RecyclerView recyclerView) {
+        mActivity = activity;
         if (modelData == null) {
             throw new IllegalArgumentException(
                     "modelData must not be null");
@@ -48,6 +54,9 @@ public class CampaignAdapter extends RecyclerView.Adapter<CampaignAdapter.Holder
             public void onClick(View v) {
                 int itemPosition = mRecyclerView.getChildPosition(v);
                 Campaign item = items.get(itemPosition);
+                Intent intent = new Intent(mActivity, CampaignActivity.class);
+                intent.putExtra("campaign", item.getId());
+                mActivity.startActivity(intent);
                 Log.d(TAG, item.toString());
             }
         });
