@@ -9,4 +9,14 @@ public abstract class Model {
      * The TAG for logs
      */
     private static final String TAG = Model.class.getSimpleName();
+
+    protected int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
