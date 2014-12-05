@@ -20,6 +20,7 @@ import com.epita.mti.nuitdelinfoandroid.controller.ControllerCallback;
 import com.epita.mti.nuitdelinfoandroid.design.PaletteTransformation;
 import com.epita.mti.nuitdelinfoandroid.model.Campaign;
 import com.epita.mti.nuitdelinfoandroid.model.Model;
+import com.epita.mti.nuitdelinfoandroid.util.DateUtil;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -46,32 +47,50 @@ public class CampaignFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_campaign, container, false);
 
         final TextView tvCampaignName = (TextView)view.findViewById(R.id.campaign_name);
-        tvCampaignName.setText("campaign");
-
         final TextView tvCampaignDescription = (TextView)view.findViewById(R.id.campaign_description);
-        tvCampaignName.setText("campaign");
-
         final TextView tvCampaignLocation = (TextView)view.findViewById(R.id.campaign_location);
-        tvCampaignName.setText("campaign");
-
         final TextView tvCampaignDate = (TextView)view.findViewById(R.id.campaign_date);
-        tvCampaignName.setText("campaign");
-
-        final TextView tvCampaignSub = (TextView)view.findViewById(R.id.campaign_subscription_date);
-        tvCampaignName.setText("campaign");
-
-        final TextView tvCampaignVolunteers = (TextView)view.findViewById(R.id.campaign_volunteers);
-        tvCampaignName.setText("campaign");
-
+        //final TextView tvCampaignVolunteers = (TextView)view.findViewById(R.id.campaign_volunteers);
         final ImageView imgView = (ImageView)view.findViewById(R.id.campaign_logo);
 
 
         CampaignController controller = new CampaignController();
-        controller.get(mCampaignId, new ControllerCallback() {
+        controller.get(mCampaignId, new ControllerCallback<Campaign>() {
             @Override
-            public void onResponse(Model response) {
-                Campaign c = (Campaign)response;
-                tvCampaignName.setText(c.getName());
+            public void onResponse(Campaign response) {
+                tvCampaignName.setText(response.getName());
+                tvCampaignDescription.setText(response.getDescription());
+                tvCampaignLocation.setText(response.getLocation());
+
+                StringBuilder sb = new StringBuilder();
+                sb.append("Du ");
+                sb.append(DateUtil.format(response.getStartDate()));
+                sb.append(" au ");
+                sb.append(DateUtil.format(response.getStartDate()));
+
+                tvCampaignDate.setText(sb.toString());
+
+                sb = new StringBuilder();
+                sb.append("Volontaires souhaités : ");
+                sb.append(response.getWantedVolunteers());
+
+                //tvCampaignVolunteers.setText(sb.toString());
+
+                final PaletteTransformation paletteTransformation = PaletteTransformation.instance();
+                Picasso.with(imgView.getContext()).load(response.getCharityProfile().getLogoUrl())
+                        .fit().centerCrop()
+                        .transform(paletteTransformation)
+                        .into(imgView, new Callback.EmptyCallback() {
+                            @Override
+                            public void onSuccess() {
+                                Bitmap bitmap = ((BitmapDrawable) imgView.getDrawable()).getBitmap();
+                                Palette palette = PaletteTransformation.getPalette(bitmap);
+
+                                imgView.setBackgroundColor(palette.getVibrantColor(android.R.color.white));
+                                if (isAdded())
+                                    imgView.getBackground().setAlpha(getActivity().getResources().getInteger(R.integer.picasso_alpha));
+                            }
+                        });
             }
 
             @Override
@@ -79,25 +98,7 @@ public class CampaignFragment extends Fragment {
 
             }
         });
-        String url = "";
-        /*
-        final PaletteTransformation paletteTransformation = PaletteTransformation.instance();
-        Picasso.with(imgView.getContext()).load(url)
-                .fit().centerCrop()
-                .transform(paletteTransformation)
-                        //.skipMemoryCache()
-                .into(imgView, new Callback.EmptyCallback() {
-                    @Override
-                    public void onSuccess() {
-                        Bitmap bitmap = ((BitmapDrawable) imgView.getDrawable()).getBitmap();
-                        Palette palette = PaletteTransformation.getPalette(bitmap);
 
-                        imgView.setBackgroundColor(palette.getVibrantColor(android.R.color.white));
-                        if (isAdded())
-                            imgView.getBackground().setAlpha(getActivity().getResources().getInteger(R.integer.picasso_alpha));
-                    }
-                });
-        */
         return view;
     }
 

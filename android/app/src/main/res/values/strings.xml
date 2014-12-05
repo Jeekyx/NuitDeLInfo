@@ -2,21 +2,36 @@
 <resources>
 
     <string name="app_name">Nuit de l\'Info</string>
-    <string name="action_settings">Options</string>
+    <string name="action_search">Rechercher</string>
 
     <string name="drawer_logged">Mon compte</string>
     <string name="drawer_connection">Me connecter ou</string>
     <string name="drawer_subtitle">créer mon compte</string>
 
-    <!-- Nav Drawer Menu Items -->
-    <string-array name="nav_drawer_items">
-        <item>Campagnes</item>
-        <item>Flux d\'actualité</item>
-    </string-array>
+    <string name="dialog_title_search">Recherche</string>
+    <string name="cancel">Annuler</string>
+    <string name="search">Rechercher</string>
+
+    <string name="date">Maintenant</string>
+
+    <string name="campaigns">Campagnes</string>
 
     <!-- Nav Drawer List Item Icons -->
     <!-- Keep them in order as the titles are in -->
     <array name="nav_drawer_icons">
+        <item>@android:drawable/ic_menu_agenda</item>
     </array>
+
+    <string-array name="from_to_array">
+        <item>A partir de</item>
+        <item>Jusqu\'au</item>
+    </string-array>
+
+    <string-array name="length_array">
+        <item>N\'importe quelle durée</item>
+        <item>Durée courte (jusqu\'à 3 mois)</item>
+        <item>Durée moyenne (3 à 6 mois)</item>
+        <item>Durée longue (plus de 6 mois)</item>
+    </string-array>
 
 </resources>

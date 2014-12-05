@@ -9,7 +9,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by _Gary_ on 28/11/2014.
  * Simple stack to use OkHttp with Volley
  */
 public class OkHttpStack extends HurlStack {

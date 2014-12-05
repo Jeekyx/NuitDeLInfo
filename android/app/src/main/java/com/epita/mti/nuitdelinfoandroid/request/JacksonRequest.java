@@ -20,7 +20,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by _Gary_ on 28/11/2014.
  * A Jackson request, based on the Volley request
  */
 public class JacksonRequest<T extends Model> extends Request<T> {

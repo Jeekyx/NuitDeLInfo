@@ -2,29 +2,26 @@ package com.epita.mti.nuitdelinfoandroid.listener;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v4.widget.DrawerLayout;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.epita.mti.nuitdelinfoandroid.activity.FeedsActivity;
 import com.epita.mti.nuitdelinfoandroid.app.AppController;
+import com.epita.mti.nuitdelinfoandroid.design.MenuDrawer;
 
-/**
- * Created by mrollin on 04/12/14.
- */
 public class MenuDrawerClickListener implements ListView.OnItemClickListener {
 
     private final static String TAG = MenuDrawerClickListener.class.getSimpleName();
 
-    private final DrawerLayout mDrawerLayout;
-    private final ListView mDrawerList;
+    private final MenuDrawer mMenuDrawer;
     private final Activity mActivity;
 
-    public MenuDrawerClickListener(Activity activity, DrawerLayout drawerLayout, ListView drawerList) {
+    public MenuDrawerClickListener(Activity activity, MenuDrawer menuDrawer) {
         mActivity = activity;
-        mDrawerLayout = drawerLayout;
-        mDrawerList = drawerList;
+        mMenuDrawer = menuDrawer;
     }
 
     @Override
@@ -38,22 +35,17 @@ public class MenuDrawerClickListener implements ListView.OnItemClickListener {
      */
     private void displayView(int position) {
         // update the main content by replacing fragments
-        Class<?> nextActivity = null;
         switch (position) {
             case 0:
+                //Intent intent = new Intent(mActivity, nextActivity);
                 //nextActivity = (AppController.getInstance().userIsLogged()) ?
                 //        AccountActivity.class : ConnectionActivity.class;
                 break;
             default:
+                Intent intent = new Intent(mActivity, FeedsActivity.class);
+                intent.putExtra("campaign", mMenuDrawer.mAdapter.mItems.get(position - 1).getId());
+                mActivity.startActivity(intent);
                 break;
-        }
-
-        if (nextActivity != null) {
-            mDrawerLayout.closeDrawer(mDrawerList);
-            mActivity.startActivity(new Intent(mActivity, nextActivity));
-        } else {
-            // error in creating fragment
-            Log.e(TAG, "Error in creating fragment");
         }
     }
 }
