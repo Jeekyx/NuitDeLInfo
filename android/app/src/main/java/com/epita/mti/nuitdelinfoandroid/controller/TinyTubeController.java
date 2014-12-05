@@ -12,7 +12,6 @@ import com.fasterxml.jackson.databind.JavaType;
  * Created by _Gary_ on 28/11/2014.
  */
 public class TinyTubeController extends Controller<TinyTubeModel> {
-
     public void search(final ControllerCallback callback) {
         AppController.getInstance().addToRequestQueue(new JacksonRequest<>(Request.Method.GET, "/youtube_api_search.json", new JacksonRequestCallback<TinyTubeModel>() {
             @Override

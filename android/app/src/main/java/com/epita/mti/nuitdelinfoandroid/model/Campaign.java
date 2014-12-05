@@ -1,5 +1,7 @@
 package com.epita.mti.nuitdelinfoandroid.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 import java.util.List;
 
@@ -11,14 +13,19 @@ public class Campaign extends Model {
     private String description;
     private String location;
     // The number of volunteers wanted for the campaign
+    @JsonProperty("places")
     private int wantedVolunteers;
 
+    @JsonProperty("charity")
     private CharityProfile charityProfile;
     private List<Feed> feeds;
     private List<VolunteerProfile> volunteers;
 
+    @JsonProperty("start_date")
     private Date startDate;
+    @JsonProperty("end_date")
     private Date endDate;
+    @JsonProperty("end_registration_date")
     private Date inscriptionEndDate;
 
     public String getName() {

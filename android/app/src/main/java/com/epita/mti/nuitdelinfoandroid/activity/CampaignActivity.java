@@ -6,28 +6,29 @@ import android.util.Log;
 import android.view.View;
 
 import com.epita.mti.nuitdelinfoandroid.R;
+import com.epita.mti.nuitdelinfoandroid.controller.CampaignController;
+import com.epita.mti.nuitdelinfoandroid.controller.ControllerCallback;
 import com.epita.mti.nuitdelinfoandroid.fragment.CampaignFragment;
 import com.epita.mti.nuitdelinfoandroid.fragment.HomeFragment;
 import com.epita.mti.nuitdelinfoandroid.model.Campaign;
+import com.epita.mti.nuitdelinfoandroid.model.Model;
 
 /**
  * Created by yvan on 12/4/14.
  */
 public class CampaignActivity extends BaseActivity {
-    private Campaign mCampaign;
+    private int mCampaignId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_campaign);
         super.onCreate(savedInstanceState);
 
-        int campaignId = getIntent().getExtras().getInt("campaign");
-        mCampaign = new Campaign();
-        mCampaign.setId(0);
+        mCampaignId = getIntent().getExtras().getInt("campaign");
 
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, createFragment(campaignId))
+                    .add(R.id.container, createFragment(mCampaignId))
                     .commit();
         }
     }
@@ -35,7 +36,7 @@ public class CampaignActivity extends BaseActivity {
 
     public void displayFeeds(View view) {
         Intent intent = new Intent(this, FeedsActivity.class);
-        intent.putExtra("campaign", mCampaign.getId());
+        intent.putExtra("campaign", mCampaignId);
         startActivity(intent);
     }
 

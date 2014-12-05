@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.epita.mti.nuitdelinfoandroid.R;
+import com.epita.mti.nuitdelinfoandroid.controller.CampaignController;
 import com.epita.mti.nuitdelinfoandroid.design.MenuDrawer;
 import com.epita.mti.nuitdelinfoandroid.fragment.HomeFragment;
 
@@ -29,6 +30,7 @@ public class HomeActivity extends BaseActivity {
                     .add(R.id.container, new HomeFragment())
                     .commit();
         }
+
     }
 
 
