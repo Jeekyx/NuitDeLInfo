@@ -20,7 +20,7 @@ class CampaignsController < ApplicationController
 
   def show
     if @campaign != nil
-      render json: @campaign
+      render json: @campaign.to_json(include: [:charity, :volunteers, :fluxes => {include: {:user => {include: :volunteer}}}])
     else
       render nothing: true, status: :not_found
     end

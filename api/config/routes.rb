@@ -22,6 +22,12 @@ Rails.application.routes.draw do
     post 'fluxes/:campaign_id' => 'volunteers#create_flux'
   end
 
+  # Search routes
+  get 'search'                     => 'search#index'
+  get 'search/campaigns/registrable' => 'search#registrable_campaigns'
+  get 'search/campaigns/finished'  => 'search#finished_campaigns'
+  get 'search/campaigns/current'   => 'search#current_campaigns'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
