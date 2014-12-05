@@ -2,13 +2,14 @@ package com.epita.mti.nuitdelinfoandroid.request;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.epita.mti.nuitdelinfoandroid.model.Model;
 import com.fasterxml.jackson.databind.JavaType;
 
 /**
  * Created by _Gary_ on 28/11/2014.
  * A request callback for Jackson request
  */
-public abstract class JacksonRequestCallback<T> {
+public abstract class JacksonRequestCallback<T extends Model> {
     /**
      * The TAG for logs
      */

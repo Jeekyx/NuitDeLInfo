@@ -15,8 +15,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.epita.mti.nuitdelinfoandroid.R;
+import com.epita.mti.nuitdelinfoandroid.controller.CampaignController;
+import com.epita.mti.nuitdelinfoandroid.controller.ControllerCallback;
 import com.epita.mti.nuitdelinfoandroid.design.PaletteTransformation;
 import com.epita.mti.nuitdelinfoandroid.model.Campaign;
+import com.epita.mti.nuitdelinfoandroid.model.Model;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -26,7 +29,7 @@ import java.util.zip.Inflater;
  * Created by yvan on 12/4/14.
  */
 public class CampaignFragment extends Fragment {
-    private Campaign mCampaign;
+    private int mCampaignId;
 
     public CampaignFragment() {
     }
@@ -35,8 +38,7 @@ public class CampaignFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        int campaignId = getArguments().getInt("campaign");
-        mCampaign = null;
+        mCampaignId = getArguments().getInt("campaign");
     }
 
     @Override
@@ -63,6 +65,20 @@ public class CampaignFragment extends Fragment {
 
         final ImageView imgView = (ImageView)view.findViewById(R.id.campaign_logo);
 
+
+        CampaignController controller = new CampaignController();
+        controller.get(mCampaignId, new ControllerCallback() {
+            @Override
+            public void onResponse(Model response) {
+                Campaign c = (Campaign)response;
+                tvCampaignName.setText(c.getName());
+            }
+
+            @Override
+            public void onError(Exception error) {
+
+            }
+        });
         String url = "";
         /*
         final PaletteTransformation paletteTransformation = PaletteTransformation.instance();
