@@ -78,3 +78,7 @@ h3.popover-title {
     background-color: #006687;
     border: 0;
 }
+
+.popover {
+    z-index: 99999 !important;
+}

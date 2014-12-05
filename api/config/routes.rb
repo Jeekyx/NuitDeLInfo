@@ -1,4 +1,27 @@
 Rails.application.routes.draw do
+
+  devise_for :users, :controllers => {:registrations => "registrations", :sessions => "sessions"}
+
+  resources :campaigns, only: [ :index, :show, :create, :update, :destroy ] do
+    get 'fluxes'
+  end
+
+  resources :charities, only: [ :index, :show, :update ] do
+    get 'campaigns'
+    post 'campaigns' => 'charities#create_campaign'
+  end
+
+  resources :fluxes, only: [ :index, :show, :create, :update, :destroy ]
+
+  resources :registrations, only: [ :index, :show, :create, :update, :destroy ]
+
+  resources :volunteers, only: [ :index, :show, :update ] do
+    get 'registrations'
+    post 'registrations/:campaign_id' => 'volunteers#create_registration'
+
+    post 'fluxes/:campaign_id' => 'volunteers#create_flux'
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
