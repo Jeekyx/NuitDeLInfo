@@ -16,6 +16,10 @@
                     templateUrl: 'views/Signup.html',
                     controller: 'SignupController'
                 })
+                .when('/Home', {
+                    templateUrl: 'views/Home.html',
+                    controller: 'HomeController'
+                })
             $locationProvider.html5Mode({
                 enabled: true,
                 requireBase: false
