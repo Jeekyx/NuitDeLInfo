@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #dbdbdb;
+    background-color: #fff;
 }
 
 #menus {
@@ -13,6 +13,9 @@ body {
 }
 
 #footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     margin-top: 10px;
     padding: 10px;
     background-color: #222222;
