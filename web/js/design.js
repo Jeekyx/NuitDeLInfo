@@ -8,3 +8,10 @@ $(document).ready(function () {
         }
     });
 });
+
+$(document).ready(function () {
+    $("#menus a").click(function () {
+        $("#menus li").removeClass('active');
+        $(this).parent().addClass('active');
+    });
+});
