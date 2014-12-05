@@ -10,10 +10,6 @@ import com.epita.mti.nuitdelinfoandroid.request.JacksonRequest;
 import com.epita.mti.nuitdelinfoandroid.request.JacksonRequestCallback;
 import com.fasterxml.jackson.databind.JavaType;
 
-/**
- * Created by _Gary_ on 28/11/2014.
- * Abstract Controller
- */
 public abstract class Controller<T extends Model> {
     /**
      * The TAG for logs

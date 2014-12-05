@@ -13,9 +13,6 @@ import com.epita.mti.nuitdelinfoandroid.listener.MenuDrawerClickListener;
 
 import java.util.ArrayList;
 
-/**
- * Created by mrollin on 04/12/14.
- */
 public class MenuDrawer {
 
     private final static String TAG = MenuDrawer.class.getSimpleName();
@@ -28,9 +25,9 @@ public class MenuDrawer {
     public DrawerLayout mDrawerLayout;
     public ListView mDrawerList;
     public ActionBarDrawerToggle mDrawerToggle;
+    public MenuDrawerAdapter mAdapter;
 
     private String[] mNavMenuTitles;
-    private TypedArray mNavMenuIcons;
     private ArrayList<MenuDrawerItem> mNavDrawerItems;
 
     public MenuDrawer(HomeActivity activity) {
@@ -42,29 +39,18 @@ public class MenuDrawer {
      * Initialize the menu drawer
      */
     private void init() {
-        // Load slide menu items from resources (string.xml)
-        mNavMenuTitles = mActivity.getResources().getStringArray(R.array.nav_drawer_items);
-
-        // Nav drawer icons from resources (string.xml)
-        mNavMenuIcons = mActivity.getResources().obtainTypedArray(R.array.nav_drawer_icons);
-
         mDrawerLayout = (DrawerLayout) mActivity.findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) mActivity.findViewById(R.id.left_drawer);
 
         mNavDrawerItems = new ArrayList<>();
-
-        setContent();
-
-        // Recycle the typed array
-        mNavMenuIcons.recycle();
 
         // Set up the header
         final View header = mActivity.getLayoutInflater().inflate(R.layout.drawer_header, mDrawerList, false);
         mDrawerList.addHeaderView(header);
 
         // Setting the nav drawer list adapter
-        MenuDrawerAdapter adapter = new MenuDrawerAdapter(mActivity.getApplicationContext(), mNavDrawerItems);
-        mDrawerList.setAdapter(adapter);
+        mAdapter = new MenuDrawerAdapter(mActivity, 0, mNavDrawerItems);
+        mDrawerList.setAdapter(mAdapter);
 
         // Enabling action bar app icon and behaving it as toggle button
         mActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -79,14 +65,6 @@ public class MenuDrawer {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         // Set the listener for the list within the drawer
-        mDrawerList.setOnItemClickListener(new MenuDrawerClickListener(mActivity, mDrawerLayout, mDrawerList));
-    }
-
-    /**
-     * Set up the content of the drawer menu
-     */
-    private void setContent() {
-        for (int i = 0; i < mNavMenuTitles.length; ++i)
-            mNavDrawerItems.add(new MenuDrawerItem(mNavMenuTitles[i], mNavMenuIcons.getResourceId(i, -1)));
+        mDrawerList.setOnItemClickListener(new MenuDrawerClickListener(mActivity, this));
     }
 }
