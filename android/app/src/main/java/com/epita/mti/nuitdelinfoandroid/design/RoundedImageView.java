@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import com.epita.mti.nuitdelinfoandroid.R;
 
 /**
- * Created by gary on 16/10/14.
  * Extend of an ImageView to create a rounded one
  */
 public class RoundedImageView extends ImageView {

@@ -1,11 +1,11 @@
 package com.epita.mti.nuitdelinfoandroid.adapter;
 
-import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,49 +13,69 @@ import com.epita.mti.nuitdelinfoandroid.R;
 import com.epita.mti.nuitdelinfoandroid.design.MenuDrawerItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Created by mrollin on 04/12/14.
- */
-public class MenuDrawerAdapter extends BaseAdapter {
+public class MenuDrawerAdapter extends ArrayAdapter<MenuDrawerItem> {
+    private static final String TAG = MenuDrawerAdapter.class.getSimpleName();
 
-    private Context mContext;
-    private ArrayList<MenuDrawerItem> mNavDrawerItems;
+    private LayoutInflater mInflater;
 
-    public MenuDrawerAdapter(Context context, ArrayList<MenuDrawerItem> navDrawerItems) {
-        mContext = context;
-        mNavDrawerItems = navDrawerItems;
+    public ArrayList<MenuDrawerItem> mItems;
+
+    public MenuDrawerAdapter(Context context, int textViewResourceId, ArrayList<MenuDrawerItem> items) {
+        super(context, textViewResourceId, items);
+        this.mItems = items;
+        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getCount() {
-        return mNavDrawerItems.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return mNavDrawerItems.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
+        return mItems.size();
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            LayoutInflater mInflater = (LayoutInflater)
-                    mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = mInflater.inflate(R.layout.item_drawer, null);
+        View view = convertView;
+        final Holder holder;
+
+        if (view == null) {
+            // View doesn't exist so create it and create the holder
+            view = mInflater.inflate(R.layout.item_drawer, parent, false);
+
+            holder = new Holder();
+            holder.imgIcon = (ImageView) view.findViewById(R.id.icon);
+            holder.txtId = (TextView) view.findViewById(R.id.id);
+            holder.txtTitle = (TextView) view.findViewById(R.id.title);
+
+            view.setTag(holder);
+        } else {
+            // Just get our existing holder
+            holder = (Holder) view.getTag();
         }
 
-        ImageView imgIcon = (ImageView) convertView.findViewById(R.id.icon);
-        TextView txtTitle = (TextView) convertView.findViewById(R.id.title);
+        // Populate via the holder for speed
+        MenuDrawerItem item = getItem(position);
 
-        imgIcon.setImageResource(mNavDrawerItems.get(position).getIcon());
-        txtTitle.setText(mNavDrawerItems.get(position).getTitle());
+        holder.txtId.setText(String.valueOf(item.getId()));
+        holder.txtTitle.setText(item.getTitle());
+        //holder.imgIcon
 
-        return convertView;
+        return view;
+    }
+
+
+    public void addFlux(String campaignName, int campaignId) {
+        mItems.add(new MenuDrawerItem(campaignId, campaignName, android.R.drawable.arrow_down_float));
+        notifyDataSetChanged();
+    }
+
+    // Holder class used to efficiently recycle view positions
+    private static final class Holder {
+        public ImageView imgIcon;
+        public TextView txtId;
+        public TextView txtTitle;
     }
 }

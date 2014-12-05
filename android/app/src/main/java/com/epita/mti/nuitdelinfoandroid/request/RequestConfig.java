@@ -1,8 +1,5 @@
 package com.epita.mti.nuitdelinfoandroid.request;
 
-/**
- * Created by _Gary_ on 28/11/2014.
- */
 public class RequestConfig {
     /**
      * Volley requests configuration values

@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.util.Map;
 
 /**
- * Created by _Gary_ on 28/11/2014.
  * A Jackson response, based on the Volley network response
  */
 public class JacksonNetworkResponse extends NetworkResponse {

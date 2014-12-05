@@ -10,10 +10,6 @@ import com.epita.mti.nuitdelinfoandroid.model.User;
 import com.epita.mti.nuitdelinfoandroid.request.RequestConfig;
 import com.epita.mti.nuitdelinfoandroid.request.OkHttpStack;
 
-/**
- * Created by _Gary_ on 28/11/2014.
- * Application global singleton
- */
 public class AppController extends Application {
     /**
      * The TAG for logs

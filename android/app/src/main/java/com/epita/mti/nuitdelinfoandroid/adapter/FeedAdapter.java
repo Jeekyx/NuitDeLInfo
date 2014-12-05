@@ -15,10 +15,10 @@ import android.widget.TextView;
 
 import com.epita.mti.nuitdelinfoandroid.R;
 import com.epita.mti.nuitdelinfoandroid.activity.CampaignActivity;
-import com.epita.mti.nuitdelinfoandroid.activity.HomeActivity;
 import com.epita.mti.nuitdelinfoandroid.design.PaletteTransformation;
 import com.epita.mti.nuitdelinfoandroid.design.RoundedImageView;
 import com.epita.mti.nuitdelinfoandroid.model.Campaign;
+import com.epita.mti.nuitdelinfoandroid.model.Feed;
 import com.epita.mti.nuitdelinfoandroid.util.DateUtil;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -26,18 +26,17 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 /**
- * Created by mrollin on 24/10/14.
+ * Created by yvan on 12/5/14.
  */
-public class CampaignAdapter extends RecyclerView.Adapter<CampaignAdapter.Holder> {
-    private static final String TAG = CampaignAdapter.class.getSimpleName();
+public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.Holder>  {
+    private static final String TAG = FeedAdapter.class.getSimpleName();
 
-    private LayoutInflater mInflater;
     private Activity mActivity;
 
     private RecyclerView mRecyclerView;
-    private List<Campaign> items;
+    private List<Feed> items;
 
-    public CampaignAdapter(Activity activity, List<Campaign> modelData, RecyclerView recyclerView) {
+    public FeedAdapter(Activity activity, List<Feed> modelData, RecyclerView recyclerView) {
         mActivity = activity;
         if (modelData == null) {
             throw new IllegalArgumentException(
@@ -52,17 +51,18 @@ public class CampaignAdapter extends RecyclerView.Adapter<CampaignAdapter.Holder
             ViewGroup viewGroup, int viewType) {
         View itemView = LayoutInflater.
                 from(viewGroup.getContext()).
-                inflate(R.layout.item_campaign,
+                inflate(R.layout.item_feed,
                         viewGroup,
                         false);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int itemPosition = mRecyclerView.getChildPosition(v);
-                Campaign item = items.get(itemPosition);
-                Intent intent = new Intent(mActivity, CampaignActivity.class);
+                /*Feed item = items.get(itemPosition);
+                Intent intent = new Intent(mActivity, FeedActivity.class);
                 intent.putExtra("campaign", item.getId());
                 mActivity.startActivity(intent);
+                Log.d(TAG, item.toString());*/
             }
         });
 
@@ -71,17 +71,15 @@ public class CampaignAdapter extends RecyclerView.Adapter<CampaignAdapter.Holder
 
     @Override
     public void onBindViewHolder(final Holder viewHolder, int position) {
-        Campaign model = items.get(position);
+        Feed model = items.get(position);
 
         // Populate the item contents
-        viewHolder.tvItemName.setText(model.getName());
-        viewHolder.tvItemEndDate.setText(DateUtil.timeAgoInWords(model.getInscriptionEndDate()));
-        viewHolder.tvItemLocation.setText(model.getLocation());
+        viewHolder.tvItemDate.setText(DateUtil.timeAgoInWords(model.getSubmissionDate()));
+        viewHolder.tvItemMessage.setText(model.getMesssage());
 
         // Load the screen cap image on a background thread
-
         final PaletteTransformation paletteTransformation = PaletteTransformation.instance();
-        Picasso.with(viewHolder.ivItemLogo.getContext()).load(model.getCharityProfile().getLogoUrl())
+        Picasso.with(viewHolder.ivItemLogo.getContext()).load(model.getImageLocation())
                 .fit().centerCrop()
                 .transform(paletteTransformation)
                 .into(viewHolder.ivItemLogo, new Callback.EmptyCallback() {
@@ -101,7 +99,7 @@ public class CampaignAdapter extends RecyclerView.Adapter<CampaignAdapter.Holder
      *
      * @param list the list to add
      */
-    public void addAll(List<Campaign> list) {
+    public void addAll(List<Feed> list) {
         items.addAll(list);
         notifyDataSetChanged();
     }
@@ -113,16 +111,14 @@ public class CampaignAdapter extends RecyclerView.Adapter<CampaignAdapter.Holder
 
     public final static class Holder extends RecyclerView.ViewHolder {
         public ImageView ivItemLogo;
-        public TextView tvItemName;
-        public TextView tvItemEndDate;
-        public TextView tvItemLocation;
+        public TextView tvItemDate;
+        public TextView tvItemMessage;
 
         public Holder(View itemView) {
             super(itemView);
-            ivItemLogo = (RoundedImageView) itemView.findViewById(R.id.item_logo);
-            tvItemName = (TextView) itemView.findViewById(R.id.item_name);
-            tvItemEndDate = (TextView) itemView.findViewById(R.id.item_end_date);
-            tvItemLocation = (TextView) itemView.findViewById(R.id.item_location);
+            ivItemLogo = (ImageView) itemView.findViewById(R.id.item_logo);
+            tvItemDate = (TextView) itemView.findViewById(R.id.item_date);
+            tvItemMessage = (TextView) itemView.findViewById(R.id.item_message);
         }
     }
 }
