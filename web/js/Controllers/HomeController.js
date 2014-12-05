@@ -4,8 +4,6 @@
 
 var app = angular.module("HomeController", ['ngRoute']);
 
-app.controller("HomeController", ['$scope', '$routeParams', function($scope, $routeParams) {
+app.controller("HomeController", ['$scope', function($scope) {
     $scope.name = "home";
-    $scope.params = $routeParams;
-    $scope.data = window.data;
 }]);
