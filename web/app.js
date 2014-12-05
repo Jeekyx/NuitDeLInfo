@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
 
-    angular.module('ReportersApp', ['ngRoute', 'MainController', 'SignupController', 'ProfilController', 'CharityController'])
+    angular.module('ReportersApp', ['ngRoute', 'MainController', 'SignupController', 'ProfilController', 'CharityController', 'CampaignsController', 'HomeController'])
         .config(function ($routeProvider, $locationProvider) {
             $routeProvider
                  .when('/Profil/:profilId', {
@@ -17,6 +17,14 @@
                     controller: 'SignupController'
                 })
                 .when('/Home', {
+                    templateUrl: 'views/Home.html',
+                    controller: 'HomeController'
+                })
+                .when('/Campaigns', {
+                    templateUrl: 'views/Campaigns.html',
+                    controller: 'CampaignsController'
+                })
+                .when('/', {
                     templateUrl: 'views/Home.html',
                     controller: 'HomeController'
                 })
