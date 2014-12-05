@@ -6,6 +6,7 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.epita.mti.nuitdelinfoandroid.model.User;
 import com.epita.mti.nuitdelinfoandroid.request.RequestConfig;
 import com.epita.mti.nuitdelinfoandroid.request.OkHttpStack;
 
@@ -28,6 +29,8 @@ public class AppController extends Application {
      * Volley request queue
      */
     private RequestQueue mRequestQueue;
+
+    private User mUser;
 
     /**
      * Get the instance of the Application
@@ -89,5 +92,13 @@ public class AppController extends Application {
      */
     public void cancelRequest(final String tag) {
         mRequestQueue.cancelAll(tag);
+    }
+
+    public User getUser() {
+        return mUser;
+    }
+
+    public void setUser(User mUser) {
+        this.mUser = mUser;
     }
 }
