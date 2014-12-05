@@ -1,0 +1,80 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+.slider {margin: 20px 0 20px!important;}
+#carousel li {margin-right: 5px;}
+#carousel img {display: block; opacity: .5; cursor: pointer;}
+#carousel img:hover {opacity: 1;}
+#carousel .flex-active-slide img {max-height: 20px; opacity: 1; cursor: default;}
+
+#main {margin-left: 20px; margin-right: 20px; overflow: hidden;}
+
+#menus {
+    margin-left: 90px;
+    min-height: 45px;
+    height: 45px;
+    color: #fff;
+}
+
+#menus li a, #connexion li a {
+    color: #fff;
+    min-height: 44px;
+    height: 44px;
+    padding-top: 12px;
+    padding-bottom: 6px;
+}
+
+#menus li a:hover {
+    color: #fff;
+    min-height: 44px;
+    height: 44px;
+    padding-top: 12px;
+    padding-bottom: 6px;
+    background-color: #006687;
+}
+
+a.navbar-brand {
+    color: #fff !important;
+    padding-top: 10px !important;
+}
+
+#menus li.active a {
+    color: #fff;
+    min-height: 44px;
+    height: 44px;
+    padding-top: 12px;
+    padding-bottom: 6px;
+    background-color: #006687;
+}
+
+#search {
+    margin-left: 90px;
+}
+
+#footer {
+    /*position: fixed;
+    bottom: 0;
+    width: 100%;*/
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #222222;
+    color: #dbdbdb;
+    font-size: 11px;
+    text-align: center;
+}
+
+.navbar-inverse {
+    min-height: 45px;
+    height: 45px;
+    background-color: #007196;
+    border-color: #007196;
+    color: #fff;
+}
+
+h3.popover-title {
+    background-color: #006687;
+    border: 0;
+}

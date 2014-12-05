@@ -8,7 +8,6 @@ import java.util.Date;
  * Created by mrollin on 28/11/14.
  */
 public class DateUtil {
-
     /**
      * Convert a date into a "time ago" string
      * @param date the date

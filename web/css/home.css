@@ -1,0 +1,71 @@
+#carousel-example-generic {
+    height: 400px;
+    text-align: center;
+    margin: auto;
+    overflow: hidden;
+}
+
+#carousel-example-generic img {
+    margin: auto;
+    width: 100%;
+    /*height: 300px;
+    max-height: 300px;*/
+}
+
+#home_header {
+    height: 400px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#home_list_campagnes {
+    text-align: center;
+    padding: 10px;
+}
+
+div.campagne {
+    position: relative;
+    margin: 10px;
+    padding: 12px;
+    text-align: left;
+    background-color: rgba(255, 255, 255, 0.40);
+    color: #000;
+    min-height: 200px;
+    background-size: cover;
+}
+
+div.campagne_background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    background-size: cover;
+    z-index: -1;
+}
+
+p.campagne_title {
+    font-size: 20px;
+}
+
+p.campagne_description {
+    font-size: 14px;
+}
+
+/*img.campagne_img {
+    max-width: 200px;
+}*/
+
+p.campagne_button {
+    text-align: right;
+    margin-bottom: 0;
+}
+
+div.filters {
+    background-color: rgba(0, 0, 0, 0.80);
+    color: #fff;
+    height: 100%;
+    width: 100%;
+}
