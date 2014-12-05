@@ -1,28 +1,24 @@
 (function(angular) {
     'use strict';
 
-    angular.module('ReportersApp', ['ngRoute'])
-        .controller("MainController", function ($scope, $route, $routeParams, $location) {
-            $scope.$route = $route;
-            $scope.$location = $location;
-            $scope.$routeParams = $routeParams;
-        })
-        .controller("SignupController", function ($scope) {
-            $scope.name = "signup";
-        })
+    angular.module('ReportersApp', ['ngRoute', 'MainController', 'SignupController', 'ProfilController', 'CharityController'])
         .config(function ($routeProvider, $locationProvider) {
             $routeProvider
-                /*.when('/Profil/:profilId', {
+                 .when('/Profil/:profilId', {
                  templateUrl: 'views/Profil.html',
                  controller: 'ProfilController'
                  })
-                 .when('/charity/:charityId', {
-                 templateUrl: 'views/Charity.html',
+                 .when('/Charity/:charityId', {
+                 templateUrl: 'views/Signup.html',
                  controller: 'CharityController'
-                 })*/
+                 })
                 .when('/Signup', {
-                    templateUrl: 'Signup.html',
+                    templateUrl: 'views/Signup.html',
                     controller: 'SignupController'
+                })
+                .when('/Home', {
+                    templateUrl: 'views/Home.html',
+                    controller: 'HomeController'
                 })
             $locationProvider.html5Mode({
                 enabled: true,

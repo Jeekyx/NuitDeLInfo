@@ -19,10 +19,14 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.epita.mti.nuitdelinfoandroid.R;
 import com.epita.mti.nuitdelinfoandroid.adapter.CampaignAdapter;
+import com.epita.mti.nuitdelinfoandroid.controller.CampaignController;
+import com.epita.mti.nuitdelinfoandroid.controller.CampaignsController;
 import com.epita.mti.nuitdelinfoandroid.controller.ControllerCallback;
 import com.epita.mti.nuitdelinfoandroid.controller.TinyTubeController;
 import com.epita.mti.nuitdelinfoandroid.design.MenuDrawer;
 import com.epita.mti.nuitdelinfoandroid.model.Campaign;
+import com.epita.mti.nuitdelinfoandroid.model.Campaigns;
+import com.epita.mti.nuitdelinfoandroid.model.Model;
 import com.epita.mti.nuitdelinfoandroid.model.TinyTubeModel;
 import com.epita.mti.nuitdelinfoandroid.model.TinyTubeModel.Item;
 import com.epita.mti.nuitdelinfoandroid.request.JacksonRequest;
@@ -31,6 +35,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -67,25 +72,25 @@ public class HomeFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        ArrayList<Campaign> campaigns = new ArrayList<>();
-
-        Campaign c = new Campaign();
-
-        c.setName("Name");
-        c.setLocation("Paris");
-        c.setInscriptionEndDate(new Date());
-
-        campaigns.add(c);
-
-        mAdapter = new CampaignAdapter(getActivity(), campaigns, mRecyclerView);
-        mRecyclerView.setAdapter(mAdapter);
-
         loadData();
 
         return view;
     }
 
     private void loadData() {
+        CampaignsController controller = new CampaignsController();
+        controller.getAll(new ControllerCallback() {
+            @Override
+            public void onResponse(Model response) {
+                List<Campaign> campaigns = ((Campaigns)response).getCampaigns();
+                mAdapter = new CampaignAdapter(getActivity(), campaigns, mRecyclerView);
+                mRecyclerView.setAdapter(mAdapter);
+            }
 
+            @Override
+            public void onError(Exception error) {
+                Log.d(TAG, "Error : " + error);
+            }
+        });
     }
 }

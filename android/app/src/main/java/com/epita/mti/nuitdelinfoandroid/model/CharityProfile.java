@@ -1,5 +1,7 @@
 package com.epita.mti.nuitdelinfoandroid.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Created by yvan on 12/4/14.
  */
@@ -8,8 +10,8 @@ public class CharityProfile extends Model {
     private String description;
     private String email;
     private String website;
-    private String address;
-    private String imageUrl;
+    @JsonProperty("logo")
+    private String logoUrl;
     private User user;
 
     public String getName() {
@@ -44,14 +46,6 @@ public class CharityProfile extends Model {
         this.website = website;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public User getUser() {
         return user;
     }
@@ -60,11 +54,11 @@ public class CharityProfile extends Model {
         this.user = user;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getLogoUrl() {
+        return logoUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
     }
 }

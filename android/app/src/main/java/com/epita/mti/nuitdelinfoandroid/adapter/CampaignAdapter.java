@@ -2,6 +2,9 @@ package com.epita.mti.nuitdelinfoandroid.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,9 +16,12 @@ import android.widget.TextView;
 import com.epita.mti.nuitdelinfoandroid.R;
 import com.epita.mti.nuitdelinfoandroid.activity.CampaignActivity;
 import com.epita.mti.nuitdelinfoandroid.activity.HomeActivity;
+import com.epita.mti.nuitdelinfoandroid.design.PaletteTransformation;
 import com.epita.mti.nuitdelinfoandroid.design.RoundedImageView;
 import com.epita.mti.nuitdelinfoandroid.model.Campaign;
 import com.epita.mti.nuitdelinfoandroid.util.DateUtil;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -72,11 +78,8 @@ public class CampaignAdapter extends RecyclerView.Adapter<CampaignAdapter.Holder
         viewHolder.tvItemName.setText(model.getName());
         viewHolder.tvItemEndDate.setText(DateUtil.timeAgoInWords(model.getInscriptionEndDate()));
         viewHolder.tvItemLocation.setText(model.getLocation());
-
-        // Load the screen cap image on a background thread
-        /*
         final PaletteTransformation paletteTransformation = PaletteTransformation.instance();
-        Picasso.with(viewHolder.ivProductPicture.getContext()).load(model.getThumbnails())
+        Picasso.with(viewHolder.ivItemLogo.getContext()).load(model.getCharityProfile().getLogoUrl())
                 .fit().centerCrop()
                 .transform(paletteTransformation)
                 .into(viewHolder.ivItemLogo, new Callback.EmptyCallback() {
@@ -89,7 +92,6 @@ public class CampaignAdapter extends RecyclerView.Adapter<CampaignAdapter.Holder
                         viewHolder.ivItemLogo.getBackground().setAlpha(20);
                     }
                 });
-        */
     }
 
     /**

@@ -4,7 +4,7 @@
 
 var app = angular.module("SignupController", ['ngRoute']);
 
-app.controller("SignupController", ['$scope', function($scope) {
-    $scope.data = "signup";
-
+app.controller("SignupController", ['$scope', '$routeParams', function($scope, $routeParams) {
+    $scope.name = "signup";
+    $scope.params = $routeParams;
 }]);

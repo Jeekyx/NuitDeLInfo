@@ -7,19 +7,23 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
+import com.epita.mti.nuitdelinfoandroid.app.AppController;
+import com.epita.mti.nuitdelinfoandroid.model.Model;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.apache.http.HttpStatus;
 
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by _Gary_ on 28/11/2014.
  * A Jackson request, based on the Volley request
  */
-public class JacksonRequest<T> extends Request<T> {
+public class JacksonRequest<T extends Model> extends Request<T> {
     /**
      * The TAG for logs
      */
@@ -59,6 +63,8 @@ public class JacksonRequest<T> extends Request<T> {
      */
     public JacksonRequest(final int method, final String url, final Map<String, String> params, final JacksonRequestCallback<T> callback) {
         super(method, buildUrl(method, url, params), null);
+
+        OBJECT_MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         mCallback = callback;
 
@@ -172,5 +178,18 @@ public class JacksonRequest<T> extends Request<T> {
     @Override
     public Map<String, String> getParams() {
         return mParams;
+    }
+
+    @Override
+    public Map<String, String> getHeaders() {
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Content-Type", "application/json");
+        headers.put("Accept", "application/json");
+
+        if (AppController.getInstance().getUser() != null) {
+            headers.put("Auth-Token", AppController.getInstance().getUser().getToken());
+        }
+
+        return headers;
     }
 }

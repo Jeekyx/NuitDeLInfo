@@ -13,5 +13,5 @@ public class RequestConfig {
     /**
      * Project endpoint
      */
-    public static final String ENDPOINT = "http://www.tutos-android.com/projet";
+    public static final String ENDPOINT = "http://gm-dev.fr:3333";
 }
