@@ -6,4 +6,8 @@ angular.module("MainController", ['ngRoute'])
         $scope.$route = $route;
         $scope.$location = $location;
         $scope.$routeParams = $routeParams;
+
+        window.data = {};
+
+
     });
